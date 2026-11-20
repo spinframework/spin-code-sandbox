@@ -21,7 +21,7 @@ route = { private = true }
 component = "{{project-name | kebab_case}}"
 
 [component.{{project-name | kebab_case}}]
-source = { url = "https://github.com/spinframework/spin-code-sandbox/releases/download/canary/ts-sandbox.wasm", digest = "sha256:5c815217be184d01ad9b1697273ae41dba22c8d1bb6fd47d831a2ebaf04fe30b" }
+source = { url = "https://github.com/spinframework/spin-code-sandbox/releases/download/v0.1.0/ts-sandbox.wasm", digest = "sha256:533eaa2d7d5a3318951bebd576e847740d61e89c6299129a3b754aaf04150e89" }
 key_value_stores = ["default"]
 # Outbound HTTP is denied until you list hosts here, e.g. ["https://api.example.com"]. Each
 # request's `allowedHosts` can only narrow this list, and guard-io always refuses private and
@@ -39,5 +39,5 @@ route = { private = true }
 component = "{{project-name | kebab_case}}-bundler"
 
 [component.{{project-name | kebab_case}}-bundler]
-source = { url = "https://github.com/spinframework/spin-code-sandbox/releases/download/canary/bundler.wasm", digest = "sha256:d9f9bfde7a3d24033937cb2af0fe346e0a8a1c47ccdd09f4bfd316ff49480033" }
+source = { url = "https://github.com/spinframework/spin-code-sandbox/releases/download/v0.1.0/bundler.wasm", digest = "sha256:b4430fa74eae6d2db0f32c829ffd53472d093fb5176cb0502c90f002bf7d01d3" }
 allowed_outbound_hosts = ["https://esm.sh"]

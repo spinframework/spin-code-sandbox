@@ -160,7 +160,7 @@ api/               Hono component: the LLM loop, the code store, and the live-se
   src/llm/         provider interface + Anthropic and OpenAI implementations (one bundled per build)
 ui/                Nuxt SPA: build gallery + create flow
   pages/index.vue  the gallery + "describe an app" UI
-../../packages/typescript/sandbox   private JS/TS interpreter, built in place, reached via ts-sandbox.spin.internal
-../../py-sandbox   private Python interpreter, built in place, reached via py-sandbox.spin.internal
-../../packages/typescript/bundler   experimental private npm bundler, built in place, reached via bundler.spin.internal
+ts-sandbox.wasm    private JS/TS interpreter (v0.1.0 release), reached via ts-sandbox.spin.internal
+py-sandbox.wasm    private Python interpreter (v0.1.0 release), reached via py-sandbox.spin.internal
+bundler.wasm       experimental private npm bundler (v0.1.0 release), reached via bundler.spin.internal
 ```
