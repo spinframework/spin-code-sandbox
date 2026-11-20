@@ -17,8 +17,7 @@
         "allowImportingTsExtensions": true,
         "noEmit": true,
         "paths": {
-            "#llm-provider": ["./src/llm/anthropic.ts"],
-            "zod": ["./node_modules/zod"]
+            "#llm-provider": ["./src/llm/anthropic.ts"]
         }
     },
     "include": [

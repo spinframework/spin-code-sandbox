@@ -17,8 +17,8 @@ The two interpreters (`ts-sandbox`, `py-sandbox`) are private components of this
 (`route = { private = true }`), so they have no public route and are reachable only
 from the `api` component via local service chaining (`<component>.spin.internal`). A
 private `bundler` component (experimental) packages any extra npm dependencies the model requests. The
-API depends on the sandbox client from this repo ([`@spinframework/spin-code-sandbox`](../../sdk),
-a local `file:` dependency) and holds one `Interpreter` per language, each pointed at
+API depends on the sandbox client ([`@spinframework/spin-code-sandbox`](../../sdk),
+the published npm package) and holds one `Interpreter` per language, each pointed at
 its component's internal URL.
 
 ## How it works: the CodeAct pattern
@@ -138,9 +138,10 @@ at an external sandbox instead.
 
 Everything is one app, with no separate interpreter to start.
 
-1. Build: `spin build` (add `--profile openai` for the OpenAI build) builds all five components: the API (esbuild + `j2w`), the UI
-   (`nuxt generate`), the two private interpreters, and the private bundler (this
-   repo's components, built in place from `../../`).
+1. Build: `spin build` (add `--profile openai` for the OpenAI build) builds the API (esbuild + `j2w`)
+   and the UI (`nuxt generate`). The two private interpreters and the private bundler are
+   prebuilt components from this repo's `v0.1.0` GitHub release, which Spin downloads and
+   verifies by digest.
 2. Run (the model server and key come from the environment):
    ```bash
    export SPIN_VARIABLE_MODEL_BASE_URL=<model-base-url> SPIN_VARIABLE_MODEL_API_KEY=<api-key>
@@ -200,7 +201,7 @@ api/               Hono component: the LLM tool-use loop + the interpreter tool
   src/llm/         provider interface + Anthropic and OpenAI implementations (one bundled per build)
 ui/                Nuxt SPA chat (near-verbatim from upstream; one filesystem prompt swapped)
   pages/index.vue  the chat UI
-../../packages/typescript/sandbox   private JS/TS interpreter, built in place, reached via ts-sandbox.spin.internal
-../../py-sandbox   private Python interpreter, built in place, reached via py-sandbox.spin.internal
-../../packages/typescript/bundler   experimental private npm bundler, built in place, reached via bundler.spin.internal
+ts-sandbox.wasm    private JS/TS interpreter (v0.1.0 release), reached via ts-sandbox.spin.internal
+py-sandbox.wasm    private Python interpreter (v0.1.0 release), reached via py-sandbox.spin.internal
+bundler.wasm       experimental private npm bundler (v0.1.0 release), reached via bundler.spin.internal
 ```

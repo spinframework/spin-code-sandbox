@@ -8,7 +8,7 @@
     "build": "node build.mjs && mkdirp dist && j2w -i build/bundle.js --initLocation http://api.localhost -o dist/api.wasm"
   },
   "dependencies": {
-    "@spinframework/spin-code-sandbox": "file:../../../sdk",
+    "@spinframework/spin-code-sandbox": "^0.1.0",
     "@spinframework/wasi-http-proxy": "^2.0.0",
     "hono": "^4.13.19"
   },

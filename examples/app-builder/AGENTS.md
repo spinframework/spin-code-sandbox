@@ -19,7 +19,7 @@ Five components; only `ui` and `api` have public routes.
   of stored apps and a "describe an app" create flow that streams the generation and
   links to the live URL.
 - **`ts-sandbox` / `py-sandbox`** (private, `route = { private = true }`): this repo's
-  interpreter components, built in place from `../../`. They execute the stored handler;
+  interpreter components, pulled prebuilt from the `v0.1.0` GitHub release. They execute the stored handler;
   ts-sandbox also holds the code store in its scoped `default` KV. Reachable only from `api` via
   service chaining.
 - **`bundler`** (private, experimental): bundles a JS app's npm `dependencies` once at publish time;
