@@ -73,8 +73,7 @@ route = { private = true }
 component = "ts-sandbox"
 
 [component.ts-sandbox]
-source = "../../dist/ts-sandbox.wasm"
-exclude_files = ["**/node_modules"]
+source = { url = "https://github.com/spinframework/spin-code-sandbox/releases/download/v0.1.0/ts-sandbox.wasm", digest = "sha256:533eaa2d7d5a3318951bebd576e847740d61e89c6299129a3b754aaf04150e89" }
 key_value_stores = ["default"]
 # Outbound HTTP is denied until you list hosts here, e.g. ["https://api.example.com"]. Each
 # request's `allowedHosts` can only narrow this list, and it always refuses private and
@@ -82,25 +81,18 @@ key_value_stores = ["default"]
 allowed_outbound_hosts = []
 [component.ts-sandbox.variables]
 log_level = "{{ log_level }}"
-[component.ts-sandbox.build]
-command = "bash build-composed.sh"
-workdir = "../../packages/typescript/sandbox"
 
 [[trigger.http]]
 route = { private = true }
 component = "py-sandbox"
 
 [component.py-sandbox]
-source = "../../dist/py-sandbox.wasm"
+source = { url = "https://github.com/spinframework/spin-code-sandbox/releases/download/v0.1.0/py-sandbox.wasm", digest = "sha256:a2e5be435099a849e04242120524d937ca1411c413e32227f4d6c00f698d3a85" }
 key_value_stores = ["default"]
 # Outbound HTTP is denied until you list hosts here, e.g. ["https://api.example.com"]. Each
 # request's `allowedHosts` can only narrow this list, and it always refuses private and
 # internal addresses.
 allowed_outbound_hosts = []
-[component.py-sandbox.build]
-command = "bash build-composed.sh"
-workdir = "../../py-sandbox"
-watch = ["*.py", "requirements.txt"]
 
 # EXPERIMENTAL private bundler for JavaScript npm dependencies: the SDK POSTs (source + package.json)
 # here and runs the returned self-contained bundle. It fetches deps from esm.sh (esm_base_url)
@@ -110,11 +102,7 @@ route = { private = true }
 component = "bundler"
 
 [component.bundler]
-source = "../../packages/typescript/bundler/dist/bundler.wasm"
-exclude_files = ["**/node_modules"]
+source = { url = "https://github.com/spinframework/spin-code-sandbox/releases/download/v0.1.0/bundler.wasm", digest = "sha256:b4430fa74eae6d2db0f32c829ffd53472d093fb5176cb0502c90f002bf7d01d3" }
 allowed_outbound_hosts = ["{{ esm_base_url }}"]
 [component.bundler.variables]
 esm_base_url = "{{ esm_base_url }}"
-[component.bundler.build]
-command = "npm ci && npm run build"
-workdir = "../../packages/typescript/bundler"

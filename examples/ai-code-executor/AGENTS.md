@@ -10,14 +10,14 @@ Five components; only `ui` and `api` have public routes.
 - **`api/`** (public `/api/...`): a Hono component (TypeScript to Wasm via esbuild +
   `j2w`). It runs the agent loop in [`api/src/index.ts`](api/src/index.ts): one tool
   (`run_in_wasm_interpreter`), the system prompt, and the streaming NDJSON protocol. It
-  depends on the sandbox client [`@spinframework/spin-code-sandbox`](../../sdk) (a local `file:`
-  dependency in [`api/package.json`](api/package.json)) and holds one `Interpreter` per
+  depends on the sandbox client [`@spinframework/spin-code-sandbox`](../../sdk) (the published npm
+  package, a dependency in [`api/package.json`](api/package.json)) and holds one `Interpreter` per
   language, each pointed at a private interpreter component's `spin.internal` URL.
 - **`ui/`** (public `/...`): a Nuxt SPA served by the Spin static fileserver. Adapted
   from the upstream example and trimmed to the interpreter-only surface (a
   filesystem-assuming prompt was swapped for an interpreter-friendly one).
 - **`ts-sandbox` / `py-sandbox`** (private, `route = { private = true }`): this repo's
-  interpreter components, built in place from `../../packages/typescript/sandbox` and `../../py-sandbox`.
+  interpreter components, pulled prebuilt from the `v0.1.0` GitHub release (URL + digest in `spin.toml`).
   They have no public route and are reachable only from `api` via service chaining
   (`ts-sandbox.spin.internal` / `py-sandbox.spin.internal`), which the API lists in its
   `allowed_outbound_hosts`.
@@ -44,7 +44,7 @@ separately.
 
 ```bash
 export SPIN_VARIABLE_MODEL_BASE_URL=<model-base-url> SPIN_VARIABLE_MODEL_API_KEY=<api-key>
-spin up --build                    # Anthropic Messages API; builds all 5 components + serves
+spin up --build                    # Anthropic Messages API; builds the api and ui, pulls the released sandboxes
 spin up --profile openai --build   # OpenAI Chat Completions API
 ```
 

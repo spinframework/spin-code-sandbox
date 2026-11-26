@@ -50,7 +50,5 @@ await build({
         '.tsx': 'tsx',
     },
     resolveExtensions: ['.ts', '.tsx', '.js'],
-    // The SDK is linked from ../../../sdk; resolve its peer dependencies (zod) from this app.
-    nodePaths: [path.resolve('node_modules')],
     sourceRoot: path.resolve(process.cwd(), 'src'),
 });

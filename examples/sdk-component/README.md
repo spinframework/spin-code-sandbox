@@ -10,13 +10,8 @@ durable storage.
 
 ## Run
 
-Build the hardened, composed sandbox artifacts from the repository root first:
-
-```bash
-spin build
-```
-
-Then start this app:
+The sandbox components come prebuilt from this repo's `v0.1.0` GitHub release (Spin downloads
+them and verifies their digests), so only the `api` component is built locally:
 
 ```bash
 cd examples/sdk-component

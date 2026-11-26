@@ -79,21 +79,19 @@ await py.run(code, { lang: "python" }); // application-owned policy, see sdk/REA
    prerelease). The workflow runs the full test workflow, then builds
    `ts-sandbox.wasm`, `py-sandbox.wasm`, and `bundler.wasm` from the same commit and
    uploads them, plus a `checksums-*.txt`, to the release.
-2. Point the templates at the new release (fills in real `sha256` digests):
+2. Point the templates and the examples at the new release (fills in real `sha256` digests):
 
    ```bash
    scripts/update-template-refs.sh vX.Y.Z            # uses spinframework/spin-code-sandbox
    scripts/update-template-refs.sh vX.Y.Z myorg/repo # or specify your fork
-   git diff templates/                               # review, then commit
+   git diff templates/ examples/                     # review, then commit
    ```
 
 ## Current release pin
 
-Until the first versioned release, the templates point at the rolling `canary`
-prerelease of `spinframework/spin-code-sandbox`. Every Release workflow run rebuilds the
-`canary` assets, which changes their digests, so `spin up` on a generated app fails
-digest verification until you re-run `scripts/update-template-refs.sh canary`. Once a
-`vX.Y.Z` tag exists, pin the templates to it instead; versioned assets never change.
+The templates and examples are pinned to the `v0.1.0` release of `spinframework/spin-code-sandbox`.
+Versioned assets never change, so their digests stay valid. After each new `vX.Y.Z`
+release, re-run `scripts/update-template-refs.sh vX.Y.Z` to move the pin.
 Forks pass their own `owner/repo` to the script.
 
 The prebuilt `wasm32-wasi` Python packages are committed in `py-sandbox/wasi-deps`, so
